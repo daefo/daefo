@@ -1,0 +1,111 @@
+import java.util.*;
+import java.text.NumberFormat;
+import java.util.Random;
+
+class Main {
+  public static void main(String[] args) {
+
+    Scanner input = new Scanner (System.in);
+
+    NumberFormat money = NumberFormat.getCurrencyInstance();
+    NumberFormat percent = NumberFormat.getPercentInstance();
+    Random rand = new Random();
+
+    System.out.println("Would you like to BOZO, BOGO, or BOGOZO sort?:");
+    String sortType = input.next();
+      
+  
+    
+    LinkedList<Integer> liz = new LinkedList<Integer>();
+    System.out.println("How many things would you like to add to your list?");
+    int Llength = input.nextInt();
+    int ans;
+    int iterations=0;
+    
+    for(int x=1; x<=Llength; x++){
+      System.out.println("What do you want to add?");
+      ans = input.nextInt();
+      liz.add(ans);
+    } //take input
+    ArrayList<Integer> sorted = new ArrayList<Integer>(liz);
+    Collections.sort(sorted); //sort
+
+    
+   if(sortType.equalsIgnoreCase("BOZO")){  
+    
+    
+    System.out.println(liz+" is list");
+    System.out.println(sorted+" is sorted");
+    
+    int aRand = liz.get(rand.nextInt(Llength));
+    int bRand = liz.get(rand.nextInt(Llength));
+
+  // System.out.println(aRand+" a");
+  //  System.out.println(bRand+" b");
+
+    int indA = liz.indexOf(aRand);
+    int indB = liz.indexOf(bRand);
+
+  //  System.out.println(indA+" index a");
+  //  System.out.println(indB+" index b");
+
+  //  System.out.println(liz);
+    liz.set(indA,bRand);
+    liz.set(indB,aRand);
+  //  System.out.println(liz);
+
+    
+    while(!liz.equals(sorted)){
+      aRand = liz.get(rand.nextInt(Llength));
+      bRand = liz.get(rand.nextInt(Llength));
+      indA = liz.indexOf(aRand);
+      indB = liz.indexOf(bRand);
+      liz.set(indA,bRand);
+      liz.set(indB,aRand);
+      iterations++;
+      System.out.println("#"+iterations+"    "+liz);
+    }
+    
+   }//BOZO SORT
+
+    else if(sortType.equalsIgnoreCase("BOGO")){
+      
+    while(!liz.equals(sorted)){  
+      for(int i = 0; i <= Llength;i++){
+        int bozoRand = liz.get(rand.nextInt(Llength));
+        int bozoPos = rand.nextInt(Llength);
+        int indBozo = liz.indexOf(bozoRand);
+        liz.remove(indBozo);
+        liz.add(bozoPos,bozoRand);
+        
+      }
+      iterations++;
+      System.out.println("#"+iterations+"    "+liz);
+    }
+    
+    }//BOGO SORT
+
+    else if(sortType.equalsIgnoreCase("BOGOZO")){
+     
+      while(!liz.equals(sorted)){  
+      int bogzR = sorted.get(rand.nextInt(Llength));
+      int bogzPos = rand.nextInt(Llength);
+      liz.set(bogzPos,bogzR);
+      iterations++;
+      System.out.println("#"+iterations+"    "+liz);
+
+
+
+      }
+    }//BOGOZO sort
+
+    {
+      System.out.println("");System.out.println("");System.out.println("");
+    }//spacer
+    System.out.println("Solved in "+iterations+" attempts");
+    
+
+
+
+  }
+}  
